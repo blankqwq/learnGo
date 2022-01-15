@@ -1,0 +1,25 @@
+syntax = "proto3";
+import "validate/validate.proto";
+option go_package="./proto";
+
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (Person) returns (HelloReply) {}
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+
+message Person {
+  uint64 id    = 1 [(validate.rules).uint64.gt    = 999];
+
+  string email = 2 [(validate.rules).string.email = true];
+
+  Location home = 3 [(validate.rules).message.required = true];
+  message Location {
+    double lat = 1 [(validate.rules).double = { gte: -90,  lte: 90 }];
+    double lng = 2 [(validate.rules).double = { gte: -180, lte: 180 }];
+  }
+}

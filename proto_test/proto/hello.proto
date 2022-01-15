@@ -1,0 +1,10 @@
+syntax = "proto3";
+option go_package = "../proto/";
+
+import "base.proto";
+import "google/protobuf/empty.proto";
+
+service Greeter{
+  rpc Ping(google.protobuf.Empty) returns (Pong);
+}
+

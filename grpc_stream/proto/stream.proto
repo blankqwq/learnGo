@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package="../proto";
+
+//package proto;
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc GetStream (StreamReqData) returns (stream StreamResData);
+  rpc PutStream (stream StreamReqData) returns (StreamResData);
+  rpc AllStream (stream StreamReqData) returns (stream StreamResData);
+}
+
+// The request message containing the user's name.
+message StreamReqData {
+  string data = 1;
+}
+
+// The response message containing the greetings
+message StreamResData {
+  string data = 1;
+}
