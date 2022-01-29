@@ -10,7 +10,7 @@ type Server struct {
 
 type RouteHandle interface {
 	AddRoute(url, method string, serverHandle ServerHandle, filters []FilterInterface)
-	Match(url string, method string) (error, Filter)
+	Match(url string, method string) (Filter,error)
 	http.Handler
 }
 

@@ -26,8 +26,8 @@ func login(c *Context)error{
 func main(){
 	 //http.HandleFunc("/", handle)
 	//err := http.ListenAndServe(":8080", nil)
-	s:=NewServer("test",&BaseRouteHandle{Route: map[string]map[string]Filter{}})
-	s.Get("/",handle,&TestFilter{})
+	s:=NewServer("test",NewBaseHandle())
+	s.Get("/*",handle,&TestFilter{})
 	s.Get("/test",login)
 	s.Run(":8080")
 }

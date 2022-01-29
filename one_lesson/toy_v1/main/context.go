@@ -9,6 +9,7 @@ import (
 type Context struct {
 	W http.ResponseWriter
 	R  *http.Request
+	RouteParameter map[string]interface{}
 }
 
 func NewContext(resp http.ResponseWriter, req *http.Request) *Context {
