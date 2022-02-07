@@ -10,7 +10,7 @@ type Server struct {
 
 type RouteHandle interface {
 	AddRoute(url, method string, serverHandle ServerHandle, filters []FilterInterface)
-	Match(url string, method string) (Filter,error)
+	Match(context *Context) (Filter,error)
 	http.Handler
 }
 
@@ -41,7 +41,7 @@ func (s *Server) addRoute(url string, method string, handle ServerHandle, filter
 func (s *Server) Run(addr string) {
 	err := http.ListenAndServe(addr, s.Handle)
 	if err != nil {
-		println("error", err)
+		panic(err)
 		return
 	}
 }
