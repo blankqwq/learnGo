@@ -13,7 +13,7 @@ type Context struct {
 }
 
 func NewContext(resp http.ResponseWriter, req *http.Request) *Context {
-	return &Context{W: resp, R: req}
+	return &Context{W: resp, R: req,RouteParameter: make(map[string]interface{},5)}
 }
 
 func (c *Context)ReadFromJson(data interface{}) error {

@@ -22,6 +22,17 @@ func login(c *Context)error{
 	},"success")
 	return nil
 }
+
+
+func test(c *Context)error{
+	println(111222)
+	c.HttpOk(struct {
+		Data string `json:"data"`
+	}{
+		fmt.Sprintf("%v",c.RouteParameter),
+	},"success")
+	return nil
+}
 // 封装server
 func main(){
 	 //http.HandleFunc("/", handle)
@@ -29,5 +40,6 @@ func main(){
 	s:=NewServer("test",NewBaseHandle())
 	s.Get("/*",handle,&TestFilter{})
 	s.Get("/test",login)
+	s.Get("/user/:test",test)
 	s.Run(":8080")
 }
