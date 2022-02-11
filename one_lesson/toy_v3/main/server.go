@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"net/http"
+	"time"
 )
 
 type Server struct {
@@ -52,6 +53,7 @@ func (s *Server) Run(addr string) {
 
 func (s *Server) ShutDown(ctx context.Context)error {
 	// 摘掉流量
+	time.Sleep(50)
 	return nil
 }
 // 自动检测是否实现了这个接口，没用其他意义

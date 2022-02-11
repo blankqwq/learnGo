@@ -19,6 +19,7 @@ func (h *BaseRouteHandle) Match(context *Context) (Filter, error) {
 }
 
 func (h *BaseRouteHandle)AddRoute(url,method string,handle ServerHandle,filters []FilterInterface) {
+	filters = append(filters, &CloseRequestFilter{})
 	h.Route.createNodeHandle(url,method,h.makeRouteFilter(handle,filters))
 }
 
