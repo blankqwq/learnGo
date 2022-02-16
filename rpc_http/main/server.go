@@ -15,18 +15,18 @@ func (s *HelloService) Hello(req string, resp *string) error {
 	return nil
 }
 
-
-func main()  {
+func main() {
+	// 注册服务
 	_ = rpc.RegisterName("Hello", &HelloService{})
 	http.HandleFunc("/jsonrpc", func(writer http.ResponseWriter, request *http.Request) {
-		var conn io.ReadWriteCloser = struct{
+		var conn io.ReadWriteCloser = struct {
 			io.Writer
 			io.ReadCloser
 		}{
 			ReadCloser: request.Body,
-			Writer: writer,
+			Writer:     writer,
 		}
 		rpc.ServeRequest(jsonrpc.NewServerCodec(conn))
 	})
-	http.ListenAndServe("0.0.0.0:8082",nil)
+	http.ListenAndServe("0.0.0.0:8082", nil)
 }
