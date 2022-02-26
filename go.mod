@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/envoyproxy/protoc-gen-validate v0.1.0
+	github.com/gin-gonic/gin v1.7.7
 	github.com/golang/protobuf v1.5.2 // indirect
 	golang.org/x/net v0.0.0-20211020060615-d418f374d309 // indirect
 	golang.org/x/sys v0.0.0-20211020174200-9d6173849985 // indirect
