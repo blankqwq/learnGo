@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/emptypb"
-	"gorpc/proto_test/proto"
+	"gorpc_study/proto_test/proto"
 )
 
 func main() {

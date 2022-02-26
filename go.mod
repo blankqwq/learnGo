@@ -1,4 +1,4 @@
-module gorpc
+module gorpc_study
 
 go 1.15
 

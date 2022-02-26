@@ -16,7 +16,7 @@ func (s *HelloService) Hello(req string, resp *string) error {
 }
 
 func main() {
-	// 注册服务
+	// 注册服务	JSON RPC=> http服务托管
 	_ = rpc.RegisterName("Hello", &HelloService{})
 	http.HandleFunc("/jsonrpc", func(writer http.ResponseWriter, request *http.Request) {
 		var conn io.ReadWriteCloser = struct {
@@ -26,7 +26,15 @@ func main() {
 			ReadCloser: request.Body,
 			Writer:     writer,
 		}
-		rpc.ServeRequest(jsonrpc.NewServerCodec(conn))
+		err := rpc.ServeRequest(jsonrpc.NewServerCodec(conn))
+		if err != nil {
+			panic(err)
+			return
+		}
 	})
-	http.ListenAndServe("0.0.0.0:8082", nil)
+	err := http.ListenAndServe("0.0.0.0:8082", nil)
+	if err != nil {
+		panic(err)
+		return
+	}
 }
