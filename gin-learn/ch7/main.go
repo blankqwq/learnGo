@@ -7,9 +7,10 @@ import (
 
 func main() {
 	route := gin.Default()
-	route.LoadHTMLFiles("templates/index.tmpl")
+	route.LoadHTMLGlob("templates/**/*.tmpl")
+	//route.LoadHTMLFiles("templates/index.tmpl")
 	route.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+		c.HTML(http.StatusOK, "index.html", gin.H{
 			"title": "hello world",
 		})
 	})
