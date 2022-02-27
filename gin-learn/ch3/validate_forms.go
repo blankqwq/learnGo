@@ -2,14 +2,13 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"gorpc_study/gin-learn/ch2/proto"
 	"net/http"
 )
 
 func main() {
 	// 实例化对象
 	route := gin.Default()
-	route.GET("/proto", testProto)
+	route.GET("/json", testJson)
 	// 启动服务
 	err := route.Run()
 	if err != nil {
@@ -17,7 +16,18 @@ func main() {
 	} // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
-func testProto(c *gin.Context) {
-	// 返回的原始字符串
-	c.ProtoBuf(http.StatusOK, proto.User{Name: "asd", Ohter: []int32{1, 23}})
+type User struct {
+	Name string `json:"user"`
+	Age  int
+}
+
+func testJson(c *gin.Context) {
+	var user User
+	user.Name = "test"
+	user.Age = 20
+	//{
+	//	"user": "test",
+	//	"Age": 20
+	//}
+	c.JSON(http.StatusOK, user)
 }
