@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"time"
 )
 
 func main() {
@@ -18,18 +17,6 @@ func main() {
 			})
 		})
 	}
-	{
-		println("test")
-		{
-			println("test inline")
-		}
-	}
-	route.POST("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	// 启动服务
 	err := route.Run()
 	if err != nil {
 		panic(err)
@@ -37,8 +24,13 @@ func main() {
 }
 
 func middlewareAuth(c *gin.Context) {
-	start := time.Now()
-	c.Set("a", 1)
+	v := c.GetHeader("x-token")
+	if v == "" {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"msg": "must login",
+		})
+		c.Abort()
+		return
+	}
 	c.Next()
-	println("runtime:", time.Since(start))
 }
