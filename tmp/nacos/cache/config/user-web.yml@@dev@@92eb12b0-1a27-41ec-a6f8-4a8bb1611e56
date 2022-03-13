@@ -1,0 +1,13 @@
+name: 'user-web'
+local: 'zh'
+host: '192.168.205.119'
+port: 9003
+user_srv:
+  host: '127.0.0.1'
+  port: 50001
+  name: 'user-srv'
+jwt_config:
+  key: "1213123"
+consul:
+  host: '127.0.0.1'
+  port: 9001

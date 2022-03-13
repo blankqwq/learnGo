@@ -23,7 +23,7 @@ func main() {
 	}
 	defer conn.Close()
 	for n := 0; n < 10; n++ {
-		print("=========================")
+		print("=========================\n")
 		user := proto.NewUserClient(conn)
 		rsp, err := user.GetUserList(context.Background(), &proto.PageInfo{
 			Page:  1,
