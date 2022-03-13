@@ -6,7 +6,7 @@ import (
 	_ "github.com/hashicorp/consul/api"
 )
 
-func Registe(name string, id string, address string, port int, tags []string) error {
+func Register(name string, id string, address string, port int, tags []string) error {
 	cfg := api.DefaultConfig()
 	cfg.Address = fmt.Sprintf("%s:%d", "localhost", 9001)
 
@@ -38,7 +38,7 @@ func Registe(name string, id string, address string, port int, tags []string) er
 }
 
 func main() {
-	err := Registe("user-web", "user-web", "192.168.233.119", 9003, []string{"user", "golang", "web"})
+	err := Register("user-web", "user-web", "192.168.233.119", 9003, []string{"user", "golang", "web"})
 	if err != nil {
 		println(err.Error())
 		return
