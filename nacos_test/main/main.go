@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/vo"
+	"gorpc_study/nacos_test/main/config"
 )
 
 func main() {
@@ -35,8 +37,16 @@ func main() {
 	}
 
 	content, err := client.GetConfig(vo.ConfigParam{
-		DataId: "user-web.yml",
+		DataId: "user-web.json",
 		Group:  "dev",
 	})
 	fmt.Println("GetConfig,config :" + content)
+
+	c := config.ServerConfig{}
+	// json
+	err = json.Unmarshal([]byte(content), &c)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(c)
 }
